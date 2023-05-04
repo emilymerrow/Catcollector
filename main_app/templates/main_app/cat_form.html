@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- if we are creating a cat object will be undefined
+if we are updating a cat the object will be the cat we are updating -->
+<!-- object comes form the CatUpdate CBV view -->
+
+{% if object %}
+	<h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+{% else %}
+	<h1>Add A cat!</h1>
+{% endif %}
+	
+
+<!-- Leave the action empty makes the form post to the same url 
+as what is used to display cats/create -->
+
+<form action="" method="POST">
+	<!-- security purpose we include 
+	csrf token, cross site request forgery token, protects our forms -->
+	{% csrf_token %}
+	<table>
+		<!-- we get a form variable that is from our CBV CatCreate -->
+		{{ form.as_table}}	
+	</table>
+	<button type="submit" class="btn">Submit</button>
+</form>
+	
+{% endblock content %}
+	
